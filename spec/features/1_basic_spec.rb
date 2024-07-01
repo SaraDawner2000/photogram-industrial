@@ -151,7 +151,7 @@ def sign_in_user
   fill_in "Password", with: @user.password
   find("input[type='submit'][name='commit']").click
 
-  return @user
+  @user
 end
 
 def user_model_exists?
