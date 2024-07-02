@@ -28,7 +28,7 @@ task sample_data: :environment do
   end
 
   users.each do |user|
-    [15].sample.times do
+    rand(15).times do
       Photo.create(
         caption: Faker::Quote.fortune_cookie,
         image: Faker::LoremFlickr.image,
@@ -40,7 +40,7 @@ task sample_data: :environment do
 
 
   photos.each do |photo|
-    [5].sample.times do
+    rand(5).times do
       Comment.create(
         body: Faker::Quote.fortune_cookie,
         author_id: User.all.sample.id,

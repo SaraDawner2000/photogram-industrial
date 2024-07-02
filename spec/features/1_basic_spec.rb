@@ -94,6 +94,7 @@ describe "The /[USERNAME] user details page" do
   end
 
   it "has a bootstrap styled 'Create Comment' button", points: 1 do
+    photo = Photo.create(image: "https://robohash.org/#{rand(9999)}", caption: "caption", owner_id: @user.id)
 
     visit "/#{@user.username}"
 
@@ -102,6 +103,7 @@ describe "The /[USERNAME] user details page" do
   end
 
   it "allows a signed in user to add a comment", points: 1 do
+    photo = Photo.create(image: "https://robohash.org/#{rand(9999)}", caption: "caption", owner_id: @user.id)
 
     visit "/#{@user.username}"
 
@@ -149,7 +151,7 @@ def sign_in_user
   fill_in "Password", with: @user.password
   find("input[type='submit'][name='commit']").click
 
-  @user
+  return @user
 end
 
 def user_model_exists?
