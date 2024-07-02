@@ -36,21 +36,31 @@ task sample_data: :environment do
       )
     end
   end
+  photos = Photo.all
 
-  12.times do
-    comment = Comment.new
-    comment.body = Faker::Quote.fortune_cookie
-    comment.author_id = User.all.sample.id
-    comment.photo_id = Photo.all.sample.id
-    comment.save
+
+  photos.each do |photo|
+    [5].sample.times do
+      Comment.create(
+        body: Faker::Quote.fortune_cookie,
+        author_id: User.all.sample.id,
+        photo_id: photo.id
+      )
+    end
+
+    fans = User.all.sample(rand(12))
+    fans.each do |fan|
+      Like.create(
+        fan_id: fan.id,
+        photo_id: photo.id
+      )
+    end
   end
 
-  12.times do
-    like = Like.new
-    like.fan_id = User.all.sample.id
-    like.photo_id = Photo.all.sample.id
-  end
-
-  p "Create 12 users, photos, comments, likes and follow requests"
+  p "#{User.count} users added to database"
+  p "#{FollowRequest.count} follow requests added to database"
+  p "#{Photo.count} photos added to database"
+  p "#{Comment.count} comments added to database"
+  p "#{Like.count} likes added to database"
 
 end
