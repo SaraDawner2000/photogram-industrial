@@ -15,7 +15,7 @@ task sample_data: :environment do
     user.private = [true, false].sample
     user.save
   end
-
+  users = User.all
   users.each do |first_user|
     users.each do |second_user|
       if rand < 0.7
@@ -27,13 +27,16 @@ task sample_data: :environment do
     end
   end
 
-  12.times do
-    photo = Photo.new
-    photo.caption = Faker::Quote.fortune_cookie
-    photo.image = Faker::LoremFlickr.image
-    photo.owner_id = User.all.sample.id
-    photo.save
+  users.each do |user|
+    [15].sample.times do
+      Photo.create(
+        caption: Faker::Quote.fortune_cookie,
+        image: Faker::LoremFlickr.image,
+        owner_id: user.id
+      )
+    end
   end
+
   12.times do
     comment = Comment.new
     comment.body = Faker::Quote.fortune_cookie
