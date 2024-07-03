@@ -7,17 +7,23 @@ task sample_data: :environment do
     Photo.destroy_all
     User.destroy_all
   end
-  12.times do
-    user = User.new
-    user.username = Faker::Internet.username
-    user.email = "#{user.username}@example.com"
-    user.password = "password"
-    user.private = [true, false].sample
-    user.save
+  usernames = Array.new(12) { Faker::Internet.username }
+
+  usernames << "alice"
+  usernames << "bob"
+
+  usernames.each do |username|
+    User.create(
+      email: "#{username}@example.com",
+      password: "password",
+      username: "#{username}",
+      private: [true, false].sample
+    )
   end
   users = User.all
   users.each do |first_user|
     users.each do |second_user|
+      next if first_user == second_user
       if rand < 0.7
         first_user.sent_follow_requests.create(
           recipient: second_user,
