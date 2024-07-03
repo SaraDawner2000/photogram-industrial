@@ -7,7 +7,7 @@ task sample_data: :environment do
     Photo.destroy_all
     User.destroy_all
   end
-  usernames = Array.new(12) { Faker::Internet.username }
+  usernames = Array.new(12) { Faker::Internet.username }.uniq
 
   usernames << "alice"
   usernames << "bob"
