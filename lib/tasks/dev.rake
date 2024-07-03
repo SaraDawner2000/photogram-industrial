@@ -7,7 +7,7 @@ task sample_data: :environment do
     Photo.destroy_all
     User.destroy_all
   end
-  usernames = Array.new(12) { Faker::Internet.username }.uniq
+  usernames = Array.new(12) { Faker::Internet.username }.uniq #is the unique method neccessary, or are there controls in place in the Faker gem that prevent the same value being generated in the same opertaion
 
   usernames << "alice"
   usernames << "bob"
@@ -20,6 +20,7 @@ task sample_data: :environment do
       private: [true, false].sample
     )
   end
+
   users = User.all
   users.each do |first_user|
     users.each do |second_user|
