@@ -12,6 +12,9 @@ class UsersController < ApplicationController
   def followers
   end
 
+  def following
+  end
+
   private
     def set_user
       @user = User.find_by!(username: params[:username])
