@@ -1,13 +1,19 @@
 class UsersController < ApplicationController
+  before_action :set_user
   def show
-    @user = User.find_by!(username: params[:username])
   end
 
   def liked
-    @user = User.find_by!(username: params[:username])
   end
 
   def feed
-    @user = User.find_by!(username: params[:username])
   end
+
+  def followers
+  end
+
+  private
+    def set_user
+      @user = User.find_by!(username: params[:username])
+    end
 end

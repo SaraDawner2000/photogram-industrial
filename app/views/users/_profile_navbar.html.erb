@@ -11,7 +11,7 @@
         <%= link_to "Feed", feed_path(user.username), class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <a class="nav-link">Followers</a>
+        <%= link_to "Followers", followers_path(user.username), class: "nav-link" %>
       </li>
       <li class="nav-item">
         <a class="nav-link">Following</a>
