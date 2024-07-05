@@ -35,10 +35,10 @@ task sample_data: :environment do
   end
 
   users.each do |user|
-    rand(15).times do
+    rand(15).times do |index|
       Photo.create(
         caption: Faker::Quote.fortune_cookie,
-        image: Faker::LoremFlickr.image,
+        image: "#{Faker::LoremFlickr.image}?random=#{index}",
         owner_id: user.id
       )
     end
@@ -49,7 +49,7 @@ task sample_data: :environment do
   photos.each do |photo|
     rand(5).times do
       Comment.create(
-        body: Faker::Quote.fortune_cookie,
+        body: Faker::Quote.yoda,
         author_id: User.all.sample.id,
         photo_id: photo.id
       )
