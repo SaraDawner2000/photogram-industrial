@@ -1,7 +1,5 @@
 <%= render "/users/profile_navbar", user: @user %>
 
-<h2>Posts</h2>
-
-<% @user.own_photos.each do |photo| %>
+<% @user.feed.each do |photo| %>
   <%= render "photos/photo", photo: photo  %>
 <% end %>

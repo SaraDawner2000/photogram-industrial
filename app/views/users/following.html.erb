@@ -1,0 +1,11 @@
+<%= render "/users/profile_navbar", user: @user %>
+
+
+
+<ul class="list-group">
+  <% @user.leaders.each do |leader| %>
+    <li class="list-group-item">
+      <%= link_to "#{leader.username}", user_path(leader.username) %>
+    </li>
+  <% end %>
+</ul>
